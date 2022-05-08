@@ -37,7 +37,7 @@ public class StorageController {
             // Read the file character by character for each line
             while ((line = bufferedReader.readLine()) != null) {
                 ArrayList<Character> characterGridRow = new ArrayList<>();
-                for (Character character : line.toCharArray()) {
+                for (char character : line.toCharArray()) {
                     characterGridRow.add(character);
                 }
                 if (line.length() > characterGridColumns) {

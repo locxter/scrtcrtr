@@ -58,31 +58,31 @@ public class Main {
                 int option = fileChooser.showOpenDialog(frame);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     file = fileChooser.getSelectedFile();
-                    storageController.setFile(file);
-                    characterGridInput.writeCharacterGrid(storageController.readCharacterGrid());
-                    rowCount = characterGridInput.getRowCount();
-                    columnCount = characterGridInput.getColumnCount();
-                    rowCountInput.setValue(rowCount);
-                    columnCountInput.setValue(columnCount);
+                    if (file.length() > 0) {
+                        storageController.setFile(file);
+                        characterGridInput.writeCharacterGrid(storageController.readCharacterGrid());
+                        rowCount = characterGridInput.getRowCount();
+                        columnCount = characterGridInput.getColumnCount();
+                        rowCountInput.setValue(rowCount);
+                        columnCountInput.setValue(columnCount);
+                    } else {
+                        file = null;
+                    }
                 }
             }
         });
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                boolean fileSelected = false;
                 if (file == null) {
                     JFileChooser fileChooser = new JFileChooser();
                     int option = fileChooser.showOpenDialog(frame);
                     if (option == JFileChooser.APPROVE_OPTION) {
                         file = fileChooser.getSelectedFile();
                         storageController.setFile(file);
-                        fileSelected = true;
                     }
-                } else {
-                    fileSelected = true;
                 }
-                if (fileSelected) {
+                if (file != null) {
                     storageController.writeCharacterGrid(characterGridInput.readCharacterGrid());
                 }
             }
