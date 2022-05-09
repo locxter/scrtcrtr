@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -66,6 +67,8 @@ public class Main {
                         rowCountInput.setValue(rowCount);
                         columnCountInput.setValue(columnCount);
                     } else {
+                        // Display an error if something does not work as expected
+                        JOptionPane.showMessageDialog(null, "Can not read empty file", "Error", JOptionPane.ERROR_MESSAGE);
                         file = null;
                     }
                 }
