@@ -79,7 +79,7 @@ public class Main {
             public void actionPerformed(ActionEvent event) {
                 if (file == null) {
                     JFileChooser fileChooser = new JFileChooser();
-                    int option = fileChooser.showOpenDialog(frame);
+                    int option = fileChooser.showSaveDialog(frame);
                     if (option == JFileChooser.APPROVE_OPTION) {
                         file = fileChooser.getSelectedFile();
                         storageController.setFile(file);
