@@ -7,11 +7,11 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -43,7 +43,7 @@ public class Main {
         JFrame frame = new JFrame("scrtcrtr");
         JPanel panel = new JPanel();
         GridBagConstraints constraints = new GridBagConstraints();
-        JButton loadButton = new JButton("Load");
+        JButton openButton = new JButton("Open");
         JButton saveButton = new JButton("Save");
         JLabel rowCountLabel = new JLabel("Rows:");
         JSpinner rowCountInput = new JSpinner(new SpinnerNumberModel(rowCount, 1, 128, 1));
@@ -52,24 +52,21 @@ public class Main {
         CharacterGridInput characterGridInput = new CharacterGridInput(rowCount, columnCount);
         JLabel aboutLabel = new JLabel("2022 locxter");
         // Add functions to the buttons and inputs
-        loadButton.addActionListener(new ActionListener() {
+        openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 JFileChooser fileChooser = new JFileChooser();
                 int option = fileChooser.showOpenDialog(frame);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     file = fileChooser.getSelectedFile();
-                    if (file.length() > 0) {
-                        storageController.setFile(file);
-                        characterGridInput.writeCharacterGrid(storageController.readCharacterGrid());
+                    storageController.setFile(file);
+                    ArrayList<ArrayList<Character>> characterGrid = storageController.readCharacterGrid();
+                    if (characterGrid != null) {
+                        characterGridInput.writeCharacterGrid(characterGrid);
                         rowCount = characterGridInput.getRowCount();
                         columnCount = characterGridInput.getColumnCount();
                         rowCountInput.setValue(rowCount);
                         columnCountInput.setValue(columnCount);
-                    } else {
-                        // Display an error if something does not work as expected
-                        JOptionPane.showMessageDialog(null, "Can not read empty file", "Error", JOptionPane.ERROR_MESSAGE);
-                        file = null;
                     }
                 }
             }
@@ -112,7 +109,7 @@ public class Main {
         constraints.weightx = 1;
         constraints.gridx = 0;
         constraints.gridy = 0;
-        panel.add(loadButton, constraints);
+        panel.add(openButton, constraints);
         constraints.gridx = 1;
         constraints.gridy = 0;
         panel.add(saveButton, constraints);
