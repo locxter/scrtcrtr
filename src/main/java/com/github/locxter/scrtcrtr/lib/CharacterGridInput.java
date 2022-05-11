@@ -23,6 +23,8 @@ public class CharacterGridInput extends JScrollPane {
     // Constructor
     public CharacterGridInput(int rowCount, int columnCount) {
         super();
+        this.rowCount = rowCount;
+        this.columnCount = columnCount;
         // Create the input grid and assemble the panel
         for (int i = 0; i < rowCount; i++) {
             ArrayList<JTextField> inputGridRow = new ArrayList<>();
@@ -41,11 +43,9 @@ public class CharacterGridInput extends JScrollPane {
             }
         }
         // Configure the scroll pane
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        this.setViewportView(panel);
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
+        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        setViewportView(panel);
     }
 
     // Getter and setter
@@ -72,7 +72,7 @@ public class CharacterGridInput extends JScrollPane {
                     inputGrid.remove(i);
                 }
             }
-            // Redraw the panel
+            // Rebuild the panel
             panel.removeAll();
             for (int i = 0; i < rowCount; i++) {
                 for (int j = 0; j < columnCount; j++) {
@@ -111,7 +111,7 @@ public class CharacterGridInput extends JScrollPane {
                     }
                 }
             }
-            // Redraw the panel
+            // Rebuild the panel
             panel.removeAll();
             for (int i = 0; i < rowCount; i++) {
                 for (int j = 0; j < columnCount; j++) {
