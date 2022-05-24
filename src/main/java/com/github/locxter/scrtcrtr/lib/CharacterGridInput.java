@@ -173,6 +173,7 @@ public class CharacterGridInput extends JScrollPane {
         input.setHorizontalAlignment(JTextField.CENTER);
         input.setDocument(new LengthLimitedDocument(1));
         input.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        // Change selected input using the arrow keys
         input.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent event) {
