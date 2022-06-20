@@ -4,6 +4,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+// Length limited document class
 public class LengthLimitedDocument extends PlainDocument {
     // Attribute
     private int limit;

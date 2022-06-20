@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-// CharacterGridInput class
+// Character grid input class
 public class CharacterGridInput extends JScrollPane {
     // Attributes
     private int rowCount;

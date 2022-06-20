@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-// StorageController class
+// Storage controller class
 public class StorageController {
     // Attribute
     private File file;
