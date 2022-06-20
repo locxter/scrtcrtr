@@ -27,7 +27,7 @@ public class StorageController {
         this.file = file;
     }
 
-    // Function to read a character grid from file
+    // Method to read a character grid from file
     public ArrayList<ArrayList<Character>> readCharacterGrid() {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -63,7 +63,7 @@ public class StorageController {
         }
     }
 
-    // Function to write a character grid to file
+    // Method to write a character grid to file
     public void writeCharacterGrid(ArrayList<ArrayList<Character>> characterGrid) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));

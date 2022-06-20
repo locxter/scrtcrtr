@@ -14,7 +14,7 @@ public class LengthLimitedDocument extends PlainDocument {
         this.limit = limit;
     }
 
-    // Function to insert the newly entered string if possible
+    // Method to insert the newly entered string if possible
     @Override
     public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
         if (str == null) {

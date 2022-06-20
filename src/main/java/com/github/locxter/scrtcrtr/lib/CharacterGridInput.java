@@ -125,7 +125,7 @@ public class CharacterGridInput extends JScrollPane {
         }
     }
 
-    // Function to read the input grid
+    // Method to read the input grid
     public ArrayList<ArrayList<Character>> readCharacterGrid() {
         ArrayList<ArrayList<Character>> characterGrid = new ArrayList<>();
         for (ArrayList<JTextField> inputGridRow : inputGrid) {
@@ -142,7 +142,7 @@ public class CharacterGridInput extends JScrollPane {
         return characterGrid;
     }
 
-    // Function to write a character grid to the input grid
+    // Method to write a character grid to the input grid
     public void writeCharacterGrid(ArrayList<ArrayList<Character>> characterGrid) {
         // Resize the input grid to the size of the character grid
         setRowCount(characterGrid.size());
@@ -163,7 +163,7 @@ public class CharacterGridInput extends JScrollPane {
         }
     }
 
-    // Helper function for creating an input
+    // Helper method for creating an input
     private JTextField createInput() {
         JTextField input = new JTextField();
         Dimension dimension = new Dimension(24, 24);

@@ -30,7 +30,7 @@ public class Main {
     static private int rowCount = 16;
     static private int columnCount = 32;
 
-    // Main function
+    // Main method
     public static void main(String[] args) {
         StorageController storageController = new StorageController(file);
         // Set a pleasing LaF
