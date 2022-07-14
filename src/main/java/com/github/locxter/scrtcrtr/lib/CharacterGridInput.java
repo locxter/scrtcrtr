@@ -20,6 +20,57 @@ public class CharacterGridInput extends JScrollPane {
     private JPanel panel = new JPanel();
     private GridBagConstraints constraints = new GridBagConstraints();
 
+    // Helper method for creating an input
+    private JTextField createInput() {
+        JTextField input = new JTextField();
+        Dimension dimension = new Dimension(24, 24);
+        input.setMaximumSize(dimension);
+        input.setMinimumSize(dimension);
+        input.setPreferredSize(dimension);
+        input.setHorizontalAlignment(JTextField.CENTER);
+        input.setDocument(new LengthLimitedDocument(1));
+        input.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        // Change selected input using the arrow keys
+        input.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent event) {
+                int key = event.getKeyCode();
+                int row = 0;
+                int column = 0;
+                for (int i = 0; i < rowCount; i++) {
+                    ArrayList<JTextField> inputGridRow = inputGrid.get(i);
+                    if (inputGridRow.indexOf(input) > -1) {
+                        column = inputGridRow.indexOf(input);
+                        row = i;
+                    }
+                }
+                switch (key) {
+                    case KeyEvent.VK_UP:
+                        if (row > 0) {
+                            inputGrid.get(row - 1).get(column).requestFocus();
+                        }
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        if (row < rowCount - 1) {
+                            inputGrid.get(row + 1).get(column).requestFocus();
+                        }
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        if (column > 0) {
+                            inputGrid.get(row).get(column - 1).requestFocus();
+                        }
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        if (column < columnCount - 1) {
+                            inputGrid.get(row).get(column + 1).requestFocus();
+                        }
+                        break;
+                }
+            }
+        });
+        return input;
+    }
+
     // Constructor
     public CharacterGridInput(int rowCount, int columnCount) {
         super();
@@ -162,56 +213,4 @@ public class CharacterGridInput extends JScrollPane {
             }
         }
     }
-
-    // Helper method for creating an input
-    private JTextField createInput() {
-        JTextField input = new JTextField();
-        Dimension dimension = new Dimension(24, 24);
-        input.setMaximumSize(dimension);
-        input.setMinimumSize(dimension);
-        input.setPreferredSize(dimension);
-        input.setHorizontalAlignment(JTextField.CENTER);
-        input.setDocument(new LengthLimitedDocument(1));
-        input.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
-        // Change selected input using the arrow keys
-        input.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent event) {
-                int key = event.getKeyCode();
-                int row = 0;
-                int column = 0;
-                for (int i = 0; i < rowCount; i++) {
-                    ArrayList<JTextField> inputGridRow = inputGrid.get(i);
-                    if (inputGridRow.indexOf(input) > -1) {
-                        column = inputGridRow.indexOf(input);
-                        row = i;
-                    }
-                }
-                switch (key) {
-                    case KeyEvent.VK_UP:
-                        if (row > 0) {
-                            inputGrid.get(row - 1).get(column).requestFocus();
-                        }
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        if (row < rowCount - 1) {
-                            inputGrid.get(row + 1).get(column).requestFocus();
-                        }
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        if (column > 0) {
-                            inputGrid.get(row).get(column - 1).requestFocus();
-                        }
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        if (column < columnCount - 1) {
-                            inputGrid.get(row).get(column + 1).requestFocus();
-                        }
-                        break;
-                }
-            }
-        });
-        return input;
-    }
-
 }
