@@ -4,7 +4,7 @@
 
 ![Overview image](overview.png)
 
-This is a very simple GUI based ASCII art creator.
+This is a GUI based ASCII art creator.
 
 ## Dependencies
 
