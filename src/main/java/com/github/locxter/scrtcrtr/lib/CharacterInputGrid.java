@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 // Character grid input class
-public class CharacterGridInput extends JScrollPane {
+public class CharacterInputGrid extends JScrollPane {
     // Attributes
     private int rowCount;
     private int columnCount;
@@ -72,7 +72,7 @@ public class CharacterGridInput extends JScrollPane {
     }
 
     // Constructor
-    public CharacterGridInput(int rowCount, int columnCount) {
+    public CharacterInputGrid(int rowCount, int columnCount) {
         super();
         this.rowCount = rowCount;
         this.columnCount = columnCount;

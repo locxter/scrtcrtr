@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.github.locxter.scrtcrtr.lib.CharacterGridInput;
+import com.github.locxter.scrtcrtr.lib.CharacterInputGrid;
 import com.github.locxter.scrtcrtr.lib.StorageController;
 
 // Main class
@@ -49,7 +49,7 @@ public class Main {
         JSpinner rowCountInput = new JSpinner(new SpinnerNumberModel(rowCount, 1, 128, 1));
         JLabel columnCountLabel = new JLabel("Columns:");
         JSpinner columnCountInput = new JSpinner(new SpinnerNumberModel(columnCount, 1, 128, 1));
-        CharacterGridInput characterGridInput = new CharacterGridInput(rowCount, columnCount);
+        CharacterInputGrid characterInputGrid = new CharacterInputGrid(rowCount, columnCount);
         JLabel aboutLabel = new JLabel("2022 locxter");
         // Add functions to the buttons and inputs
         openButton.addActionListener(new ActionListener() {
@@ -62,9 +62,9 @@ public class Main {
                     storageController.setFile(file);
                     ArrayList<ArrayList<Character>> characterGrid = storageController.readCharacterGrid();
                     if (characterGrid != null) {
-                        characterGridInput.writeCharacterGrid(characterGrid);
-                        rowCount = characterGridInput.getRowCount();
-                        columnCount = characterGridInput.getColumnCount();
+                        characterInputGrid.writeCharacterGrid(characterGrid);
+                        rowCount = characterInputGrid.getRowCount();
+                        columnCount = characterInputGrid.getColumnCount();
                         rowCountInput.setValue(rowCount);
                         columnCountInput.setValue(columnCount);
                     }
@@ -83,7 +83,7 @@ public class Main {
                     }
                 }
                 if (file != null) {
-                    storageController.writeCharacterGrid(characterGridInput.readCharacterGrid());
+                    storageController.writeCharacterGrid(characterInputGrid.readCharacterGrid());
                 }
             }
         });
@@ -91,14 +91,14 @@ public class Main {
             @Override
             public void stateChanged(ChangeEvent e) {
                 rowCount = (int) rowCountInput.getValue();
-                characterGridInput.setRowCount(rowCount);
+                characterInputGrid.setRowCount(rowCount);
             }
         });
         columnCountInput.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 columnCount = (int) columnCountInput.getValue();
-                characterGridInput.setColumnCount(columnCount);
+                characterInputGrid.setColumnCount(columnCount);
             }
         });
         // Create the main panel
@@ -134,7 +134,7 @@ public class Main {
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 6;
-        panel.add(characterGridInput, constraints);
+        panel.add(characterInputGrid, constraints);
         constraints.fill = GridBagConstraints.RELATIVE;
         constraints.weighty = 0;
         constraints.gridx = 0;
