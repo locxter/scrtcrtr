@@ -73,9 +73,7 @@ public class StorageController {
                 for (Character character : characterGridRow) {
                     bufferedWriter.write(character.toString());
                 }
-                if (i < characterGrid.size() - 1) {
-                    bufferedWriter.newLine();
-                }
+                bufferedWriter.newLine();
             }
             bufferedWriter.close();
         } catch (Exception exception) {
