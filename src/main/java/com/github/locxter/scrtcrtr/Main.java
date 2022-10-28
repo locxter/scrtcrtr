@@ -19,7 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.github.locxter.scrtcrtr.lib.CharacterInputGrid;
 import com.github.locxter.scrtcrtr.lib.StorageController;
 
@@ -35,7 +35,7 @@ public class Main {
         StorageController storageController = new StorageController(file);
         // Set a pleasing LaF
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception exception) {
             System.out.println("Failed to initialize LaF.");
         }
