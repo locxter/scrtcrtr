@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 // Character grid input class
 public class CharacterInputGrid extends JScrollPane {
     // Attributes
-    private int rowCount;
-    private int columnCount;
+    private int rowCount = 2;
+    private int columnCount = 2;
     private ArrayList<ArrayList<JTextField>> inputGrid = new ArrayList<>();
     private JPanel panel = new JPanel();
     private GridBagConstraints constraints = new GridBagConstraints();
@@ -71,11 +71,25 @@ public class CharacterInputGrid extends JScrollPane {
         return input;
     }
 
-    // Constructor
-    public CharacterInputGrid(int rowCount, int columnCount) {
+    // Helper method for assembling the panel
+    private void assemblePanel() {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                constraints.gridx = j;
+                constraints.gridy = i;
+                panel.add(inputGrid.get(i).get(j), constraints);
+            }
+        }
+        setViewportView(panel);
+    }
+
+    // Constructors
+    public CharacterInputGrid() {
         super();
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
+        // Configure the scroll pane
+        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        panel.setLayout(new GridBagLayout());
         // Create the input grid and assemble the panel
         for (int i = 0; i < rowCount; i++) {
             ArrayList<JTextField> inputGridRow = new ArrayList<>();
@@ -85,18 +99,13 @@ public class CharacterInputGrid extends JScrollPane {
             }
             inputGrid.add(inputGridRow);
         }
-        panel.setLayout(new GridBagLayout());
-        for (int i = 0; i < rowCount; i++) {
-            for (int j = 0; j < columnCount; j++) {
-                constraints.gridx = j;
-                constraints.gridy = i;
-                panel.add(inputGrid.get(i).get(j), constraints);
-            }
-        }
-        // Configure the scroll pane
-        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        setViewportView(panel);
+        assemblePanel();
+    }
+
+    public CharacterInputGrid(int rowCount, int columnCount) {
+        this();
+        setRowCount(rowCount);
+        setColumnCount(columnCount);
     }
 
     // Getter and setter
@@ -108,7 +117,7 @@ public class CharacterInputGrid extends JScrollPane {
         // Resize if needed
         if (this.rowCount != rowCount) {
             if (this.rowCount < rowCount) {
-                // Delete rows when currently to many exist
+                // Add rows when currently to few exist
                 for (int i = this.rowCount - 1; i < rowCount - 1; i++) {
                     ArrayList<JTextField> inputGridRow = new ArrayList<>();
                     for (int j = 0; j < columnCount; j++) {
@@ -118,22 +127,15 @@ public class CharacterInputGrid extends JScrollPane {
                     inputGrid.add(inputGridRow);
                 }
             } else {
-                // Add rows when currently to few exist
+                // Delete rows when currently to many exist
                 for (int i = this.rowCount - 1; i > rowCount - 1; i--) {
                     inputGrid.remove(i);
                 }
             }
             // Rebuild the panel
             panel.removeAll();
-            for (int i = 0; i < rowCount; i++) {
-                for (int j = 0; j < columnCount; j++) {
-                    constraints.gridx = j;
-                    constraints.gridy = i;
-                    panel.add(inputGrid.get(i).get(j), constraints);
-                }
-            }
-            this.setViewportView(panel);
             this.rowCount = rowCount;
+            assemblePanel();
         }
     }
 
@@ -145,7 +147,7 @@ public class CharacterInputGrid extends JScrollPane {
         // Resize if needed
         if (this.columnCount != columnCount) {
             if (this.columnCount < columnCount) {
-                // Delete columns when currently to many exist
+                // Add columns when currently to few exist
                 for (int i = 0; i < rowCount; i++) {
                     ArrayList<JTextField> inputGridRow = inputGrid.get(i);
                     for (int j = this.columnCount - 1; j < columnCount - 1; j++) {
@@ -154,7 +156,7 @@ public class CharacterInputGrid extends JScrollPane {
                     }
                 }
             } else {
-                // Add rows when currently to few exist
+                // Delete columns when currently to many exist
                 for (int i = 0; i < rowCount; i++) {
                     ArrayList<JTextField> inputGridRow = inputGrid.get(i);
                     for (int j = this.columnCount - 1; j > columnCount - 1; j--) {
@@ -164,15 +166,8 @@ public class CharacterInputGrid extends JScrollPane {
             }
             // Rebuild the panel
             panel.removeAll();
-            for (int i = 0; i < rowCount; i++) {
-                for (int j = 0; j < columnCount; j++) {
-                    constraints.gridx = j;
-                    constraints.gridy = i;
-                    panel.add(inputGrid.get(i).get(j), constraints);
-                }
-            }
-            this.setViewportView(panel);
             this.columnCount = columnCount;
+            assemblePanel();
         }
     }
 

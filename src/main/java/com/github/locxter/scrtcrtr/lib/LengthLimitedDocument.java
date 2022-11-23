@@ -7,11 +7,15 @@ import javax.swing.text.PlainDocument;
 // Length limited document class
 public class LengthLimitedDocument extends PlainDocument {
     // Attribute
-    private int limit;
+    private int limit = 1;
 
-    // Constructor
-    public LengthLimitedDocument(int limit) {
+    // Constructors
+    public LengthLimitedDocument() {
         super();
+    }
+
+    public LengthLimitedDocument(int limit) {
+        this();
         this.limit = limit;
     }
 

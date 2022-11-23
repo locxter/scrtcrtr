@@ -13,8 +13,12 @@ public class StorageController {
     // Attribute
     private File file;
 
-    // Constructor
+    // Constructors
+    public StorageController() {
+    }
+
     public StorageController(File file) {
+        this();
         this.file = file;
     }
 
