@@ -57,7 +57,8 @@ public class StorageController {
             return characterGrid;
         } catch (Exception exception) {
             // Display an error if something does not work as expected
-            JOptionPane.showMessageDialog(null, "Reading file failed", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Reading file failed", "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -76,7 +77,8 @@ public class StorageController {
             bufferedWriter.close();
         } catch (Exception exception) {
             // Display an error if something does not work as expected
-            JOptionPane.showMessageDialog(null, "Writing file failed", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Writing file failed", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 }
