@@ -1,27 +1,14 @@
 package com.github.locxter.scrtcrtr;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.github.locxter.scrtcrtr.lib.CharacterInputGrid;
 import com.github.locxter.scrtcrtr.lib.StorageController;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
 
 // Main class
 public class Main {
@@ -52,54 +39,42 @@ public class Main {
         CharacterInputGrid characterInputGrid = new CharacterInputGrid(rowCount, columnCount);
         JLabel aboutLabel = new JLabel("2022 locxter");
         // Add functions to the buttons and inputs
-        openButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
+        openButton.addActionListener(event -> {
+            JFileChooser fileChooser = new JFileChooser();
+            int option = fileChooser.showOpenDialog(frame);
+            if (option == JFileChooser.APPROVE_OPTION) {
+                file = fileChooser.getSelectedFile();
+                storageController.setFile(file);
+                ArrayList<ArrayList<Character>> characterGrid = storageController.readCharacterGrid();
+                if (characterGrid != null) {
+                    characterInputGrid.writeCharacterGrid(characterGrid);
+                    rowCount = characterInputGrid.getRowCount();
+                    columnCount = characterInputGrid.getColumnCount();
+                    rowCountInput.setValue(rowCount);
+                    columnCountInput.setValue(columnCount);
+                }
+            }
+        });
+        saveButton.addActionListener(event -> {
+            if (file == null) {
                 JFileChooser fileChooser = new JFileChooser();
-                int option = fileChooser.showOpenDialog(frame);
+                int option = fileChooser.showSaveDialog(frame);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     file = fileChooser.getSelectedFile();
                     storageController.setFile(file);
-                    ArrayList<ArrayList<Character>> characterGrid = storageController.readCharacterGrid();
-                    if (characterGrid != null) {
-                        characterInputGrid.writeCharacterGrid(characterGrid);
-                        rowCount = characterInputGrid.getRowCount();
-                        columnCount = characterInputGrid.getColumnCount();
-                        rowCountInput.setValue(rowCount);
-                        columnCountInput.setValue(columnCount);
-                    }
                 }
             }
-        });
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (file == null) {
-                    JFileChooser fileChooser = new JFileChooser();
-                    int option = fileChooser.showSaveDialog(frame);
-                    if (option == JFileChooser.APPROVE_OPTION) {
-                        file = fileChooser.getSelectedFile();
-                        storageController.setFile(file);
-                    }
-                }
-                if (file != null) {
-                    storageController.writeCharacterGrid(characterInputGrid.readCharacterGrid());
-                }
+            if (file != null) {
+                storageController.writeCharacterGrid(characterInputGrid.readCharacterGrid());
             }
         });
-        rowCountInput.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                rowCount = (int) rowCountInput.getValue();
-                characterInputGrid.setRowCount(rowCount);
-            }
+        rowCountInput.addChangeListener(e -> {
+            rowCount = (int) rowCountInput.getValue();
+            characterInputGrid.setRowCount(rowCount);
         });
-        columnCountInput.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                columnCount = (int) columnCountInput.getValue();
-                characterInputGrid.setColumnCount(columnCount);
-            }
+        columnCountInput.addChangeListener(e -> {
+            columnCount = (int) columnCountInput.getValue();
+            characterInputGrid.setColumnCount(columnCount);
         });
         // Create the main panel
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));

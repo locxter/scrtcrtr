@@ -1,12 +1,8 @@
 package com.github.locxter.scrtcrtr.lib;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 // Storage controller class
 public class StorageController {
@@ -37,7 +33,7 @@ public class StorageController {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             ArrayList<ArrayList<Character>> characterGrid = new ArrayList<>();
             int characterGridColumns = 0;
-            String line = "";
+            String line;
             // Read the file character by character for each line
             while ((line = bufferedReader.readLine()) != null) {
                 ArrayList<Character> characterGridRow = new ArrayList<>();
@@ -51,8 +47,7 @@ public class StorageController {
             }
             bufferedReader.close();
             // Fix the formatting
-            for (int i = 0; i < characterGrid.size(); i++) {
-                ArrayList<Character> characterGridRow = characterGrid.get(i);
+            for (ArrayList<Character> characterGridRow : characterGrid) {
                 if (characterGridRow.size() < characterGridColumns) {
                     for (int j = characterGridRow.size() - 1; j < characterGridColumns - 1; j++) {
                         characterGridRow.add(' ');
@@ -72,8 +67,7 @@ public class StorageController {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             // Write the file character by character for each line
-            for (int i = 0; i < characterGrid.size(); i++) {
-                ArrayList<Character> characterGridRow = characterGrid.get(i);
+            for (ArrayList<Character> characterGridRow : characterGrid) {
                 for (Character character : characterGridRow) {
                     bufferedWriter.write(character.toString());
                 }
