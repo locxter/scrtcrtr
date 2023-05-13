@@ -2,6 +2,8 @@
 
 ## Overview
 
+> This project is **DEPRECATED**, therefore might not be on par with my current coding standards and will not receive any updates now or in the future. Please use my [next generation rewrite (scrtcrtr-ng)](https://github.com/locxter/scrtcrtr-ng) instead.
+
 ![Overview image](overview.png)
 
 This is a GUI based ASCII art creator.
